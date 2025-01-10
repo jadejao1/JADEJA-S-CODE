@@ -1,0 +1,57 @@
+// Define the pin numbers for the segments (a to g) for both displays
+int segPins1[] = {2, 3, 4, 5, 6, 7, 8};  // First 7-segment display (for 'H')
+int segPins2[] = {9, 10, 11, 12, 13, A0, A1};  // Second 7-segment display (for 'I')
+
+void setup() {
+  // Set all segment pins as output
+  for (int i = 0; i < 7; i++) {
+    pinMode(segPins1[i], OUTPUT);
+    pinMode(segPins2[i], OUTPUT);
+  }
+}
+
+void loop() {
+  // Display "H" on the first 7-segment display
+  displayCharacter('H', segPins1);
+  
+  // Display "I" on the second 7-segment display
+  displayCharacter('Y', segPins2);
+
+  // Delay before refreshing
+  delay(1000);  // Delay to keep the characters visible
+}
+
+// Function to display a character on a 7-segment display
+void displayCharacter(char character, int pins[]) {
+  // Turn off all segments first
+  for (int i = 0; i < 7; i++) {
+    digitalWrite(pins[i], LOW);  // LOW to turn off each segment (common cathode)
+  }
+
+  // Check which character to display and activate the correct segments
+  switch (character) {
+    case 'H':
+      // Segments to turn on for 'H' (using common cathode)
+      digitalWrite(pins[0], LOW); // Segment a
+      digitalWrite(pins[1], HIGH); // Segment b
+      digitalWrite(pins[2], HIGH);  // Segment c
+      digitalWrite(pins[3], LOW); // Segment d
+      digitalWrite(pins[4], HIGH); // Segment e
+      digitalWrite(pins[5], HIGH);  // Segment f
+      digitalWrite(pins[6], HIGH); // Segment g
+      break;
+
+    case 'Y':
+      // Segments to turn on for 'I' (using common cathode)
+      digitalWrite(pins[0], LOW);  // Segment a
+      digitalWrite(pins[1], HIGH); // Segment b
+      digitalWrite(pins[2], HIGH);  // Segment c
+      digitalWrite(pins[3], HIGH);  // Segment d
+      digitalWrite(pins[4], LOW);  // Segment e
+      digitalWrite(pins[5], HIGH);  // Segment f
+      digitalWrite(pins[6], HIGH);  // Segment g
+      break;
+
+    // Add other characters if needed...
+  }
+}
