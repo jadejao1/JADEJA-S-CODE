@@ -1,0 +1,26 @@
+#include <Servo.h>  // Include the Servo library
+
+Servo myServo;  // Create a Servo object to control the servo motor
+
+int servoPin = 9;  // Pin the servo is connected to
+int startAngle = 0; // Initial angle (0 degrees)
+int endAngle = 180; // Final angle (180 degrees)
+
+void setup() {
+  // Attach the servo to the specified pin
+  myServo.attach(servoPin);
+}
+
+void loop() {
+  // Smooth transition from 0 to 180 degrees
+  for (int pos = startAngle; pos <= endAngle; pos++) {
+    myServo.write(pos);  // Move the servo to the current position
+    delay(50);            // Small delay to create smooth movement (adjustable)
+  }
+
+  // Smooth transition from 180 to 0 degrees
+  for (int pos = endAngle; pos >= startAngle; pos--) {
+    myServo.write(pos);  // Move the servo to the current position
+    delay(50);            // Small delay to create smooth movement (adjustable)
+  }
+}
